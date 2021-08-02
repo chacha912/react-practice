@@ -1,0 +1,33 @@
+@import url('./common/initializer.css');
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  font: 300 1.6rem/1.5 'Spoqa Han Sans Neo', 'sans-serif';
+  background: #000 url('https://iili.io/Bw3qIR.gif') no-repeat center 52%;
+  color: #fefef0;
+}
+
+.app {
+  margin-top: 2rem;
+}
+
+.app__headline {
+  font-weight: inherit;
+  margin-bottom: 0.65rem;
+  text-shadow: 0 0.3rem 0.4rem rgba(0, 0, 0, 0.6);
+}
+
+.app__list {
+  list-style: disclosure-closed;
+  margin: 0;
+  padding-left: 2rem;
+  text-shadow: 0 0.3rem 0.4rem rgba(0, 0, 0, 0.6);
+}
+
+.app__list li {
+  margin-bottom: 0.4rem;
+}
