@@ -8,15 +8,33 @@
     <link rel="stylesheet" href="./css/style.css" />
   </head>
   <body>
-    <div class="app" lang="en">
-      <h1 class="app__headline">
-        React
-        <abbr title="Application Programming Interface">API</abbr>
-      </h1>
-      <ul class="app__list list--api">
-        <li>React</li>
-        <li>ReactDOM</li>
-      </ul>
-    </div>
+    <!-- Actual DOM Node : Container -->
+    <div id="root"></div>
+
+    <!-- Programming DOM Script : Actual DOM Tree -->
+    <script>
+      const rootNode = document.getElementById('root');
+
+      /* ES6 */
+      {
+        const abbrNode = document.createElement('abbr');
+        abbrNode.setAttribute('title', 'Application Programming Interface');
+        abbrNode.textContent = 'API';
+
+        const headingNode = document.createElement('h1');
+        headingNode.insertAdjacentText('beforeend', 'React');
+        headingNode.insertAdjacentText('beforeend', ' ');
+        headingNode.insertAdjacentElement('beforeend', abbrNode);
+
+        const appNode = document.createElement('div');
+        appNode.classList.add('app');
+        appNode.setAttribute('lang', 'en');
+
+        appNode.insertAdjacentElement('beforeend', headingNode);
+        console.dir(appNode); // actual DOM
+
+        rootNode.appendChild(appNode);
+      }
+    </script>
   </body>
 </html>
