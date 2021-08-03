@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>React 렌더링 (웹 브라우저 환경)</title>
     <link rel="stylesheet" href="./css/style.css" />
+    <script src="//unpkg.com/react/umd/react.development.js" crossorigin></script>
   </head>
   <body>
     <!-- Actual DOM Node : Container -->
@@ -33,8 +34,32 @@
         appNode.insertAdjacentElement('beforeend', headingNode);
         console.dir(appNode); // actual DOM
 
-        rootNode.appendChild(appNode);
+        // rootNode.appendChild(appNode);
       }
+    </script>
+
+    <!-- React Virtual DOM Tree -->
+    <script>
+      // React Element 생성
+      const headingElement = React.createElement(
+        'h1',
+        { className: 'app__headline' },
+        'React',
+        ' ',
+        React.createElement('abbr', { title: 'Application Programming Interface', children: 'API' })
+      );
+
+      const appElement = React.createElement(
+        'div',
+        {
+          className: 'app',
+          lang: 'en'
+        },
+        headingElement
+      );
+
+      // `React 요소`이자, 가상 DOM 노드
+      console.log(appElement);
     </script>
   </body>
 </html>
