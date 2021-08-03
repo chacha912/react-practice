@@ -7,6 +7,7 @@
     <title>React 렌더링 (웹 브라우저 환경)</title>
     <link rel="stylesheet" href="./css/style.css" />
     <script src="//unpkg.com/react/umd/react.development.js" crossorigin></script>
+    <script src="//unpkg.com/react-dom/umd/react-dom.development.js" crossorigin></script>
   </head>
   <body>
     <!-- Actual DOM Node : Container -->
@@ -40,26 +41,41 @@
 
     <!-- React Virtual DOM Tree -->
     <script>
+      const { createElement: h } = React; // hyperscript
+      const { render } = ReactDOM;
+      console.log('reactDOM API', ReactDOM);
+
       // React Element 생성
-      const headingElement = React.createElement(
+      const headingElement = h(
         'h1',
         { className: 'app__headline' },
         'React',
         ' ',
-        React.createElement('abbr', { title: 'Application Programming Interface', children: 'API' })
+        h('abbr', { title: 'Application Programming Interface', children: 'API' })
       );
 
-      const appElement = React.createElement(
+      const listElement = h('ul', {
+        className: 'app__list list--api',
+        children: [h('li', null, 'React'), h('li', null, 'ReactDOM')]
+      });
+
+      const appElement = h(
         'div',
         {
           className: 'app',
           lang: 'en'
         },
-        headingElement
+        headingElement,
+        listElement
       );
 
       // `React 요소`이자, 가상 DOM 노드
       console.log(appElement);
+
+      // React VDOM Tree → render → Actual DOM Mount
+      render(appElement, rootNode, () => {
+        console.log('React VDOM Tree → render → Actual DOM Mount');
+      });
     </script>
   </body>
 </html>
