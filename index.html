@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="./css/style.css" />
     <script src="//unpkg.com/react/umd/react.development.js" crossorigin></script>
     <script src="//unpkg.com/react-dom/umd/react-dom.development.js" crossorigin></script>
+    <script
+      src="//unpkg.com/react-dom/umd/react-dom-server.browser.development.js"
+      crossorigin
+    ></script>
     <script src="//unpkg.com/babel-standalone/babel.min.js" crossorigin></script>
   </head>
   <body>
@@ -86,6 +90,10 @@
           console.log('React VDOM Tree with JSX → render → Actual DOM Mount');
         }
       );
+
+      // console.log('ReactDOMServer', ReactDOMServer);
+      console.log(ReactDOMServer.renderToStaticMarkup(appElement));
+      // console.log(ReactDOMServer.renderToString(appElement));
     </script>
   </body>
 </html>
