@@ -8,92 +8,75 @@
     <link rel="stylesheet" href="./css/style.css" />
     <script src="//unpkg.com/react/umd/react.development.js" crossorigin></script>
     <script src="//unpkg.com/react-dom/umd/react-dom.development.js" crossorigin></script>
-    <script
-      src="//unpkg.com/react-dom/umd/react-dom-server.browser.development.js"
-      crossorigin
-    ></script>
     <script src="//unpkg.com/babel-standalone/babel.min.js" crossorigin></script>
   </head>
   <body>
     <!-- Actual DOM Node : Container -->
     <div id="root"></div>
 
-    <!-- Programming DOM Script : Actual DOM Tree -->
-    <script>
-      const rootNode = document.getElementById('root');
-
-      /* ES6 */
-      {
-        const abbrNode = document.createElement('abbr');
-        abbrNode.setAttribute('title', 'Application Programming Interface');
-        abbrNode.textContent = 'API';
-
-        const headingNode = document.createElement('h1');
-        headingNode.insertAdjacentText('beforeend', 'React');
-        headingNode.insertAdjacentText('beforeend', ' ');
-        headingNode.insertAdjacentElement('beforeend', abbrNode);
-
-        const appNode = document.createElement('div');
-        appNode.classList.add('app');
-        appNode.setAttribute('lang', 'en');
-
-        appNode.insertAdjacentElement('beforeend', headingNode);
-        console.dir(appNode); // actual DOM
-
-        // rootNode.appendChild(appNode);
-      }
-    </script>
-
     <!-- React Virtual DOM Tree -->
     <script type="text/babel">
       const { createElement: h } = React; // hyperscript
       const { render } = ReactDOM;
-      console.log('reactDOM API', ReactDOM);
+
+      const rootNode = document.getElementById('root');
 
       // React Element 생성
-      const headingElement = h(
-        'h1',
-        { className: 'app__headline' },
-        'React',
-        ' ',
-        h('abbr', { title: 'Application Programming Interface', children: 'API' })
+      const headingElement = (
+        <h1 className='app__headline'>
+          React <abbr title='Application Programming Interface'>API</abbr>
+        </h1>
       );
 
-      const listElement = h('ul', {
-        className: 'app__list list--api',
-        children: [h('li', null, 'React'), h('li', null, 'ReactDOM')]
-      });
-
-      const appElement = h(
-        'div',
-        {
-          className: 'app',
-          lang: 'en',
-          children: [headingElement, listElement]
-        }
-        // children [child, child, child, ...]
-        // headingElement,
-        // listElement
+      const listElement = (
+        <ul className='app__list list--api'>
+          <li>React</li>
+          <li>ReactDOM</li>
+        </ul>
       );
 
-      // `React 요소`이자, 가상 DOM 노드
-      console.log(appElement);
+      let appElement = (
+        <div class='app' lang='en'>
+          {headingElement}
+          {listElement}
+        </div>
+      );
+
+      appElement = (
+        <div class='app' lang='en'>
+          <h1 className='app__headline'>
+            React <abbr title='Application Programming Interface'>API</abbr>
+          </h1>
+          <ul className='app__list list--api'>
+            <li>React</li>
+            <li>ReactDOM</li>
+          </ul>
+        </div>
+      );
+
+      function App(props /* { frameworkName, style } */) {
+        return (
+          <div className='app' lang='en' style={props.style}>
+            <h1 className='app__headline'>
+              {props.frameworkName} <abbr title='Application Programming Interface'>API</abbr>
+            </h1>
+            <ul className='app__list list--api'>
+              <li>React</li>
+              <li>ReactDOM</li>
+            </ul>
+          </div>
+        );
+      }
 
       // React VDOM Tree → render → Actual DOM Mount
       render(
-        <div className='app' lang='en'>
-          {headingElement}
-          {listElement}
-        </div>,
-        rootNode,
-        () => {
-          console.log('React VDOM Tree with JSX → render → Actual DOM Mount');
-        }
+        // React.createElement(App, { frameworkName: 'React' }),
+        <App
+          frameworkName='React'
+          style={{ border: '6px solid currentColor', padding: '2rem 4rem' }}
+        />,
+        rootNode
       );
-
-      // console.log('ReactDOMServer', ReactDOMServer);
-      console.log(ReactDOMServer.renderToStaticMarkup(appElement));
-      // console.log(ReactDOMServer.renderToString(appElement));
     </script>
   </body>
 </html>
