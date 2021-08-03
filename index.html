@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./css/style.css" />
     <script src="//unpkg.com/react/umd/react.development.js" crossorigin></script>
     <script src="//unpkg.com/react-dom/umd/react-dom.development.js" crossorigin></script>
+    <script src="//unpkg.com/babel-standalone/babel.min.js" crossorigin></script>
   </head>
   <body>
     <!-- Actual DOM Node : Container -->
@@ -40,7 +41,7 @@
     </script>
 
     <!-- React Virtual DOM Tree -->
-    <script>
+    <script type="text/babel">
       const { createElement: h } = React; // hyperscript
       const { render } = ReactDOM;
       console.log('reactDOM API', ReactDOM);
@@ -75,9 +76,16 @@
       console.log(appElement);
 
       // React VDOM Tree → render → Actual DOM Mount
-      render(appElement, rootNode, () => {
-        console.log('React VDOM Tree → render → Actual DOM Mount');
-      });
+      render(
+        <div className='app' lang='en'>
+          {headingElement}
+          {listElement}
+        </div>,
+        rootNode,
+        () => {
+          console.log('React VDOM Tree with JSX → render → Actual DOM Mount');
+        }
+      );
     </script>
   </body>
 </html>
