@@ -63,10 +63,12 @@
         'div',
         {
           className: 'app',
-          lang: 'en'
-        },
-        headingElement,
-        listElement
+          lang: 'en',
+          children: [headingElement, listElement]
+        }
+        // children [child, child, child, ...]
+        // headingElement,
+        // listElement
       );
 
       // `React 요소`이자, 가상 DOM 노드
